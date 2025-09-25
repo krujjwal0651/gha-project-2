@@ -1,0 +1,25 @@
+name: test-workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v5
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          npm test
+          echo "Tests completed."
